@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -58,6 +59,10 @@ public class MainActivity extends AppCompatActivity {
         }else{
             Log.e("lab2", "SOMETHNG WENT REALLY WRONG");
         }
+
+        TextView text = (TextView)findViewById(R.id.textView);
+        text.setText(result);
+
 
     }
 }
