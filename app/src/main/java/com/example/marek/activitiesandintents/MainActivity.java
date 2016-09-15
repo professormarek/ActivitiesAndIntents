@@ -1,8 +1,10 @@
 package com.example.marek.activitiesandintents;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -25,10 +27,10 @@ public class MainActivity extends AppCompatActivity {
                 //let's create an intent
                 Intent msg_intent = new Intent("com.seneca.lab2b.marek");
                 //add some extra information to the intent
-                //msg_intent.putExtra(Intent.EXTRA_TEXT, "This is my message blah blah blah");
-                //msg_intent.setType("text/plain"); //describes the MIME type of the content
                 //fire off the intent
-                startActivity(msg_intent);
+                //startActivityForResult expects both an intent and a request code so that you can match up the request with the reply
+                //for now, keep things simple with a literal number for our request code
+                startActivityForResult(msg_intent, 1);
             }
         });
 
@@ -40,5 +42,22 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(msg_intent);
             }
         });
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        String result = "RESULT NOT SET";
+        if(requestCode == 1){
+            if(resultCode == Activity.RESULT_OK){
+                result = data.getStringExtra("message");
+            }else if(resultCode == Activity.RESULT_CANCELED){
+                result = "user cancelled";
+            }
+        }else{
+            Log.e("lab2", "SOMETHNG WENT REALLY WRONG");
+        }
+
     }
 }
