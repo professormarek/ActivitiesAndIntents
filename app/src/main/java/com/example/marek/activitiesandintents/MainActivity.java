@@ -31,5 +31,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(msg_intent);
             }
         });
+
+        Button a3_button = (Button)findViewById(R.id.a3_button);
+        a3_button.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                //when sending an explicit intent use the Intent(Context, Intent) constructor
+                Intent msg_intent = new Intent(v.getContext(), ThirdActivity.class);
+                startActivity(msg_intent);
+            }
+        });
     }
 }
