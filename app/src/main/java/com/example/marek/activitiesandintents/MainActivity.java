@@ -48,12 +48,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    /* onActivityResult will be called by the Android framework once the activity we started
+    with startActivityForResult completes. We are passed the same requestCode we passed to startActivityForResult
+    and a resultCode that indicates whether the user completed the Activity or pressed Back to cancel
+    */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         String result = "RESULT NOT SET";
         if(requestCode == 1){
             if(resultCode == Activity.RESULT_OK){
+                //if everything is alright, extract the message from the Intent returned 
+                //from the Activity we started with startActivityForResult
                 result = data.getStringExtra("message");
             }else if(resultCode == Activity.RESULT_CANCELED){
                 result = "user cancelled";
@@ -61,10 +67,11 @@ public class MainActivity extends AppCompatActivity {
         }else{
             Log.e("lab2", "SOMETHNG WENT REALLY WRONG");
         }
-
+        //get the TextView from the layout and set it's text
         TextView text = (TextView)findViewById(R.id.textView);
         text.setText(result);
 
+        //example of sending a Toast
         Context context = getApplicationContext();
         String toast_text = "You are cool " + result;
         int duration = Toast.LENGTH_LONG;
